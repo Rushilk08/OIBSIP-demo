@@ -1,1 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Relay — Webhook delivery infrastructure for developers</title>
+  <meta name="description" content="Relay guarantees every webhook you send gets delivered, verified, and logged — with automatic retries and instant replay.">
 
+  <!-- Google Fonts: Space Grotesk (display/UI) + IBM Plex Mono (code & data) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- ============ NAVIGATION ============ -->
+  <header class="site-header">
+    <nav class="navbar" aria-label="Primary">
+      <a href="#home" class="brand">
+        <span class="brand-mark" aria-hidden="true"></span>
+        Relay
+      </a>
+
+      <input type="checkbox" id="nav-toggle" class="nav-toggle-input">
+      <label for="nav-toggle" class="nav-toggle-label" aria-label="Open menu">
+        <span></span><span></span><span></span>
+      </label>
+
+      <ul class="nav-links">
+        <li><a href="#home">Home</a></li>
+        <li><a href="#features">Features</a></li>
+        <li><a href="#how-it-works">How it works</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+
+      <a href="#contact" class="btn btn-primary nav-cta">Get started</a>
+    </nav>
+  </header>
+
+  <main>
+
+    <!-- ============ HERO SECTION ============ -->
+    <section id="home" class="hero">
+      <div class="hero-inner">
+        <div class="hero-copy">
+          <p class="hero-kicker">Webhook infrastructure</p>
+          <h1 class="hero-title">Every event, delivered. Every time.</h1>
+          <p class="hero-subtitle">
+            Relay sits between your services and the internet, retrying failed
+            webhooks with backoff, signing every payload, and logging each
+            attempt — so a dropped connection never means a lost event.
+          </p>
+          <div class="hero-actions">
+            <a href="#features" class="btn btn-primary">See how it works</a>
+            <a href="#contact" class="btn btn-ghost">Talk to us</a>
+          </div>
+          <p class="hero-trust">Free for your first 5,000 events a month. No credit card.</p>
+        </div>
+
+        <div class="hero-visual" aria-hidden="true">
+          <div class="panel">
+            <div class="panel-header">
+              <span class="panel-title">Delivery log</span>
+              <span class="panel-sub">live</span>
+            </div>
+            <ul class="event-list">
+              <li class="event event-delivered">
+                <span class="event-dot"></span>
+                <span class="event-name">order.paid</span>
+                <span class="event-meta">200 · 118ms</span>
+              </li>
+              <li class="event event-retrying">
+                <span class="event-dot"></span>
+                <span class="event-name">invoice.sent</span>
+                <span class="event-meta">retry 2/5</span>
+              </li>
+              <li class="event event-delivered">
+                <span class="event-dot"></span>
+                <span class="event-name">user.updated</span>
+                <span class="event-meta">200 · 94ms</span>
+              </li>
+              <li class="event event-delivered">
+                <span class="event-dot"></span>
+                <span class="event-name">shipment.created</span>
+                <span class="event-meta">200 · 132ms</span>
+              </li>
+            </ul>
+            <div class="panel-footer">
+              <span>Uptime</span>
+              <span class="panel-footer-value">99.98%</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ FEATURES SECTION ============ -->
+    <section id="features" class="features">
+      <div class="section-inner">
+        <div class="section-heading">
+          <h2>Built for the moment a webhook fails</h2>
+          <p>Endpoints go down. Networks drop packets. Relay assumes failure is
+            normal and handles it for you.</p>
+        </div>
+
+        <div class="feature-grid">
+          <article class="feature-card">
+            <span class="feature-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
+                <path d="M4 12a8 8 0 0 1 14-5M20 12a8 8 0 0 1-14 5" stroke-linecap="round"/>
+                <path d="M18 3v4h-4M6 21v-4h4" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </span>
+            <h3>Guaranteed delivery</h3>
+            <p>Failed requests are retried on an exponential backoff schedule
+              for up to 24 hours, so a five-minute outage on your side never
+              costs you data.</p>
+          </article>
+
+          <article class="feature-card">
+            <span class="feature-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
+                <path d="M12 3l7 3v5c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6l7-3z" stroke-linejoin="round"/>
+                <path d="M9 12l2 2 4-4" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </span>
+            <h3>Signed payloads</h3>
+            <p>Every request carries an HMAC signature in its headers, so your
+              endpoint can verify it actually came from Relay before it does
+              anything with it.</p>
+          </article>
+
+          <article class="feature-card">
+            <span class="feature-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
+                <path d="M4 19V5M4 19h16M8 15l3-4 3 3 4-6" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </span>
+            <h3>Live event log</h3>
+            <p>Watch every attempt as it happens: status code, response time,
+              and payload, searchable by endpoint or event type.</p>
+          </article>
+
+          <article class="feature-card">
+            <span class="feature-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
+                <path d="M3 12a9 9 0 1 1 3 6.7" stroke-linecap="round"/>
+                <path d="M3 21v-5h5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </span>
+            <h3>Instant replay</h3>
+            <p>Deployed a bug that dropped events on the floor? Pick a time
+              range and resend every affected webhook with one click.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ HOW IT WORKS SECTION ============ -->
+    <section id="how-it-works" class="how-it-works">
+      <div class="section-inner">
+        <div class="section-heading">
+          <h2>Set up in three steps</h2>
+          <p>No agents to install and nothing to deploy on your side.</p>
+        </div>
+
+        <ol class="steps">
+          <li class="step">
+            <span class="step-number">01</span>
+            <h3>Register an endpoint</h3>
+            <p>Give Relay the URL that should receive events, and pick which
+              event types it should get.</p>
+          </li>
+          <li class="step">
+            <span class="step-number">02</span>
+            <h3>Send us an event</h3>
+            <p>Post JSON to our API, or connect one of our integrations. Relay
+              queues it and starts delivery immediately.</p>
+          </li>
+          <li class="step">
+            <span class="step-number">03</span>
+            <h3>Monitor and replay</h3>
+            <p>Track delivery in the dashboard, get alerted on repeated
+              failures, and replay anything that needs a second attempt.</p>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- ============ ABOUT SECTION ============ -->
+    <section id="about" class="about">
+      <div class="section-inner about-inner">
+        <div class="about-copy">
+          <h2>Why we built Relay</h2>
+          <p>
+            We spent years on-call for payment and order systems, and the
+            outages that hurt most were never the big ones — they were a
+            single dropped webhook that quietly desynced two systems for a
+            week. Relay is the piece of infrastructure we wished we had:
+            small, boring, and reliable enough to forget about.
+          </p>
+          <p>
+            It's used today by teams shipping payments, logistics, and
+            internal tooling who would rather trust a dedicated queue than
+            re-implement retry logic in every service they own.
+          </p>
+        </div>
+
+        <div class="about-code" aria-hidden="true">
+          <div class="code-window">
+            <div class="code-window-bar">
+              <span></span><span></span><span></span>
+            </div>
+            <pre class="code-block"><code>POST /webhooks/evt_9f2a HTTP/1.1
+Host: api.yourapp.com
+X-Relay-Signature: sha256=8f4b2e...
+Content-Type: application/json
+
+{
+  "type": "order.paid",
+  "id": "evt_9f2a",
+  "attempt": 1,
+  "data": { "order_id": "ord_1183" }
+}</code></pre>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ============ FOOTER ============ -->
+  <footer id="contact" class="site-footer">
+    <div class="section-inner footer-inner">
+      <div class="footer-brand">
+        <a href="#home" class="brand">
+          <span class="brand-mark" aria-hidden="true"></span>
+          Relay
+        </a>
+        <p>Webhook delivery infrastructure for teams who can't afford to lose
+          an event.</p>
+      </div>
+
+      <div class="footer-column">
+        <h4>Contact</h4>
+        <ul>
+          <li><a href="mailto:hello@relay.example">hello@relay.example</a></li>
+          <li><a href="tel:+11234567890">+1 (123) 456-7890</a></li>
+          <li>Bengaluru, India</li>
+        </ul>
+      </div>
+
+      <div class="footer-column">
+        <h4>Product</h4>
+        <ul>
+          <li><a href="#features">Features</a></li>
+          <li><a href="#how-it-works">How it works</a></li>
+          <li><a href="#about">About</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-column">
+        <h4>Elsewhere</h4>
+        <ul class="social-links">
+          <li>
+            <a href="https://github.com/" target="_blank" rel="noopener noreferrer" aria-label="Relay on GitHub">
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2C6.48 2 2 6.58 2 12.2c0 4.5 2.87 8.32 6.84 9.67.5.1.68-.22.68-.5v-1.76c-2.78.62-3.37-1.37-3.37-1.37-.46-1.2-1.11-1.52-1.11-1.52-.9-.63.07-.62.07-.62 1 .07 1.53 1.05 1.53 1.05.9 1.56 2.36 1.11 2.94.85.09-.66.35-1.11.63-1.37-2.22-.26-4.56-1.14-4.56-5.06 0-1.12.39-2.03 1.03-2.75-.1-.26-.45-1.3.1-2.71 0 0 .84-.28 2.75 1.05a9.3 9.3 0 0 1 5 0c1.9-1.33 2.74-1.05 2.74-1.05.56 1.41.21 2.45.1 2.71.64.72 1.03 1.63 1.03 2.75 0 3.93-2.34 4.79-4.57 5.05.36.32.68.95.68 1.92v2.85c0 .28.18.61.69.5A10.03 10.03 0 0 0 22 12.2C22 6.58 17.52 2 12 2z"/></svg>
+              GitHub
+            </a>
+          </li>
+          <li>
+            <a href="https://www.linkedin.com/" target="_blank" rel="noopener noreferrer" aria-label="Relay on LinkedIn">
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9h4v12H3V9zm7 0h3.8v1.64h.05c.53-1 1.83-2.05 3.77-2.05 4.03 0 4.78 2.65 4.78 6.1V21h-4v-5.6c0-1.34-.02-3.07-1.87-3.07-1.87 0-2.16 1.46-2.16 2.97V21h-4V9z"/></svg>
+              LinkedIn
+            </a>
+          </li>
+          <li>
+            <a href="https://x.com/" target="_blank" rel="noopener noreferrer" aria-label="Relay on X">
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.24 3H21l-6.55 7.49L22.2 21h-6.16l-4.83-6.32L5.6 21H2.83l7.02-8.03L1.8 3h6.32l4.36 5.77L18.24 3zm-1.08 16.17h1.71L7.9 4.73H6.06l11.1 14.44z"/></svg>
+              X
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>&copy; 2026 Relay. All rights reserved.</p>
+      <p>Built as an internship project.</p>
+    </div>
+  </footer>
+
+</body>
+</html>
