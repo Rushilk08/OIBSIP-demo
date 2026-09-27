@@ -11,50 +11,6 @@
 </head>
 <body>
 
-<!-- reusable shoe illustration, referenced everywhere with <use> -->
-<svg width="0" height="0" style="position:absolute" aria-hidden="true">
-  <defs>
-    <symbol id="shoe-icon" viewBox="0 0 700 300">
-      <!-- sole -->
-      <path d="M52 214 C52 230, 66 242, 90 242 L586 242 C608 242, 622 231, 620 212 C598 224, 554 226, 510 220 C444 212, 332 212, 254 220 C170 229, 84 227, 52 214 Z" fill="#0E0E0C"/>
-      <!-- tread ticks -->
-      <g stroke="#F3F2ED" stroke-width="2" opacity="0.5">
-        <line x1="120" y1="222" x2="120" y2="234"/>
-        <line x1="180" y1="226" x2="180" y2="238"/>
-        <line x1="250" y1="228" x2="250" y2="240"/>
-        <line x1="330" y1="228" x2="330" y2="240"/>
-        <line x1="410" y1="225" x2="410" y2="237"/>
-        <line x1="480" y1="221" x2="480" y2="233"/>
-        <line x1="540" y1="216" x2="540" y2="228"/>
-      </g>
-      <!-- carbon plate line -->
-      <path d="M60 208 C160 196, 300 194, 420 202 C500 208, 560 212, 600 206" fill="none" stroke="#0E0E0C" stroke-width="3" opacity="0.7"/>
-      <!-- upper -->
-      <path d="M58 210 C58 178, 80 160, 122 152 C148 147, 166 129, 205 112 C268 86, 362 84, 435 103 C492 118, 538 120, 580 146 C609 163, 616 183, 603 204 L70 204 C60 204, 58 208, 58 210 Z"
-            fill="var(--shoe-upper,#ECEAE1)" stroke="#0E0E0C" stroke-width="3"/>
-      <!-- mesh texture on upper -->
-      <path d="M58 210 C58 178, 80 160, 122 152 C148 147, 166 129, 205 112 C268 86, 362 84, 435 103 C492 118, 538 120, 580 146 C609 163, 616 183, 603 204 L70 204 C60 204, 58 208, 58 210 Z"
-            fill="url(#meshPattern)" opacity="0.5"/>
-      <!-- heel counter -->
-      <path d="M108 154 C96 160, 82 174, 78 196 L120 196 C124 180, 127 166, 132 154 C123 152, 115 152, 108 154 Z" fill="#0E0E0C"/>
-      <!-- accent stripe -->
-      <path d="M120 178 C220 156, 360 150, 470 166 C520 173, 555 182, 585 196" fill="none" stroke="var(--shoe-accent,#C7FF3E)" stroke-width="9" stroke-linecap="round" opacity="0.95"/>
-      <!-- laces -->
-      <g stroke="#0E0E0C" stroke-width="6" stroke-linecap="round" opacity="0.8">
-        <line x1="238" y1="120" x2="270" y2="100"/>
-        <line x1="270" y1="130" x2="304" y2="108"/>
-        <line x1="304" y1="138" x2="338" y2="114"/>
-      </g>
-      <!-- toe cap outline -->
-      <path d="M560 150 C585 160, 605 175, 600 195" fill="none" stroke="#0E0E0C" stroke-width="2" opacity="0.5"/>
-    </symbol>
-
-    <pattern id="meshPattern" width="9" height="9" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
-      <line x1="0" y1="0" x2="0" y2="9" stroke="#0E0E0C" stroke-width="1" opacity="0.5"/>
-    </pattern>
-  </defs>
-</svg>
-
   <header class="nav">
     <div class="nav-inner">
       <a href="#top" class="logo"><span class="logo-dot"></span>Runova</a>
@@ -72,7 +28,7 @@
   <main id="top">
     <section class="hero">
       <div class="wrap">
-        <div class="eyebrow"><span class="dash"></span>Runova—</div>
+        <div class="eyebrow"><span class="dash"></span>Runova — </div>
         <h1>Momentum,<br>engineered.</h1>
         <div class="hero-sub-row">
           <p>Four running shoes built on one obsession — returning every ounce of energy you put into the ground.</p>
@@ -84,9 +40,7 @@
       </div>
 
       <div class="hero-visual">
-        <svg class="shoe-graphic" style="--shoe-upper:#ECEAE1; --shoe-accent:#0E0E0C;" viewBox="0 0 700 300" aria-label="Runova Pulse 3 running shoe illustration">
-          <use href="#shoe-icon"/>
-        </svg>
+        <img class="hero-photo" src="images/pulse3-hero.jpg" alt="Runova Pulse 3 running shoe, side profile">
       </div>
 
       <div class="wrap" style="padding:0;">
@@ -172,18 +126,16 @@
             <div class="eyebrow"><span class="dash"></span>04 — Collection</div>
             <h2>Four shoes. One philosophy.</h2>
           </div>
-          <a href="#faq" class="btn btn-outline">Find your way</a>
+          <a href="#faq" class="btn btn-outline">Find your equation</a>
         </div>
         <div class="lineup-grid">
 
           <article class="shoe-card">
-            <div class="frame frame-dark">
-              <svg class="shoe-graphic" style="--shoe-upper:#ECEAE1; --shoe-accent:#C7FF3E;" viewBox="0 0 700 300" aria-label="Pulse 3">
-                <use href="#shoe-icon"/>
-              </svg>
+            <div class="frame frame-photo">
+              <img class="shoe-photo" src="images/pulse3-studio.jpg" alt="Runova Pulse 3 running shoe, studio shot">
             </div>
             <div class="info">
-              <div class="row"><h3>Pulse 3</h3><span class="price mono">$139</span></div>
+              <div class="row"><h3>Pulse 3</h3><span class="price mono">₹4,999</span></div>
               <p class="desc">The daily trainer. Balanced ride for easy miles and tempo days alike.</p>
               <div class="mini-specs">
                 <div>Stack<strong>36mm</strong></div>
@@ -194,13 +146,11 @@
           </article>
 
           <article class="shoe-card">
-            <div class="frame frame-light">
-              <svg class="shoe-graphic" style="--shoe-upper:#0E0E0C; --shoe-accent:#F3F2ED;" viewBox="0 0 700 300" aria-label="Drift Trail">
-                <use href="#shoe-icon"/>
-              </svg>
+            <div class="frame frame-photo">
+              <img class="shoe-photo" src="images/drift-trail.jpg" alt="Runova Drift Trail shoe, on rocky terrain">
             </div>
             <div class="info">
-              <div class="row"><h3>Drift Trail</h3><span class="price mono">$159</span></div>
+              <div class="row"><h3>Drift Trail</h3><span class="price mono">₹6,499</span></div>
               <p class="desc">Rock-plated and wide-based for gravel, roots, and mixed terrain.</p>
               <div class="mini-specs">
                 <div>Stack<strong>32mm</strong></div>
@@ -211,18 +161,16 @@
           </article>
 
           <article class="shoe-card">
-            <div class="frame frame-dark">
-              <svg class="shoe-graphic" style="--shoe-upper:#C7FF3E; --shoe-accent:#0E0E0C;" viewBox="0 0 700 300" aria-label="Tempo Zero">
-                <use href="#shoe-icon"/>
-              </svg>
+            <div class="frame frame-photo">
+              <img class="shoe-photo" src="images/court-high.jpg" alt="Runova Court High sneaker, studio shot">
             </div>
             <div class="info">
-              <div class="row"><h3>Tempo Zero</h3><span class="price mono">$179</span></div>
-              <p class="desc">Race-day carbon plate and a snug fit for pushing your fastest 10k.</p>
+              <div class="row"><h3>Court High</h3><span class="price mono">₹5,999</span></div>
+              <p class="desc">Off-day silhouette in leather and suede — built for pavement, not just pace.</p>
               <div class="mini-specs">
-                <div>Stack<strong>39mm</strong></div>
-                <div>Weight<strong>168g</strong></div>
-                <div>Drop<strong>8mm</strong></div>
+                <div>Upper<strong>Suede</strong></div>
+                <div>Sole<strong>EVA cup</strong></div>
+                <div>Fit<strong>High-top</strong></div>
               </div>
             </div>
           </article>
@@ -281,7 +229,7 @@
               </svg>
             </div>
             <div class="body">
-              <p class="quote">"Thirty years of morning runs. First pair that let my knees forget how old they are."</p>
+              <p class="quote">"Ten years of morning runs. First pair that let my knees forget how old they are."</p>
               <div class="story-who"><strong>Marcus Ohene</strong>Daily runner</div>
             </div>
           </article>
@@ -360,14 +308,14 @@
           <ul>
             <li><a class="connect-link" href="https://github.com/runova" target="_blank" rel="noopener"><span class="ico">Git</span>GitHub</a></li>
             <li><a class="connect-link" href="https://linkedin.com/company/runova" target="_blank" rel="noopener"><span class="ico">in</span>LinkedIn</a></li>
-            <li><a class="connect-link" href="mailto:hello@runova.com"><span class="ico">@</span>Runova@gmail.com</a></li>
+            <li><a class="connect-link" href="mailto:hello@runova.com"><span class="ico">@</span>runova@gmail.com</a></li>
           </ul>
         </div>
       </div>
       <div class="footer-bottom">
         <p>© 2026 Runova. All rights reserved.</p>
         <div class="socials">
-          <a href="https://github.com/runova" class="social-btn" target="_blank" rel="noopener" aria-label="GitHub">Git</a>
+          <a href="https://github.com/runova" class="social-btn" target="_blank" rel="noopener" aria-label="GitHub">GH</a>
           <a href="https://linkedin.com/company/runova" class="social-btn" target="_blank" rel="noopener" aria-label="LinkedIn">in</a>
           <a href="mailto:hello@runova.com" class="social-btn" aria-label="Email">@</a>
         </div>
