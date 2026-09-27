@@ -31,7 +31,21 @@
 *{ box-sizing: border-box; margin: 0; padding: 0; }
 html{ scroll-behavior: smooth; }
 [id]{ scroll-margin-top: 96px; }
-
+#lineup{
+  scroll-margin-top: 26px;
+}
+#tech{
+  scroll-margin-top: 80px;
+}
+#measured{
+  scroll-margin-top: 138px;
+}
+#stories{
+  scroll-margin-top: 30px;
+}
+#faq{
+  scroll-margin-top: 30px;
+}
 body{
   background: var(--paper);
   color: var(--text);
