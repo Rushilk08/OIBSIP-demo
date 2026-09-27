@@ -503,6 +503,9 @@ footer{ background: var(--ink); color: var(--text-invert); padding: 64px 40px 32
   .wrap{ padding: 0 22px; }
   .nav-inner{ padding: 16px 22px; }
   .nav-links{ display: none; }
+  #tech{
+  scroll-margin-top: 25px;
+}
   .hero{ padding: 56px 4px 0; }
   .hero .btn-solid{
   transform: translateX(-13px);
