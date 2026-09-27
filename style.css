@@ -30,6 +30,7 @@
 
 *{ box-sizing: border-box; margin: 0; padding: 0; }
 html{ scroll-behavior: smooth; }
+[id]{ scroll-margin-top: 96px; }
 
 body{
   background: var(--paper);
@@ -274,13 +275,14 @@ section{ padding: 96px 40px; }
 .stat-list{ display: flex; flex-direction: column; }
 .stat-row{
   display: grid;
-  grid-template-columns: 110px 1fr;
+  grid-template-columns: minmax(96px, auto) 1fr;
+  align-items: start;
   gap: 24px;
   padding: 26px 0;
   border-top: 1px solid var(--border);
 }
 .stat-list .stat-row:last-child{ border-bottom: 1px solid var(--border); }
-.stat-row .num{ font-family: 'Archivo', sans-serif; font-weight: 900; font-size: 2.1rem; }
+.stat-row .num{ font-family: 'Archivo', sans-serif; font-weight: 900; font-size: 2.1rem; white-space: nowrap; }
 .stat-row .body h4{
   font-size: 0.88rem;
   font-weight: 700;
@@ -308,7 +310,7 @@ section{ padding: 96px 40px; }
   flex-direction: column;
 }
 .shoe-card .frame{
-  height: 220px;
+  height: 180px;
   position: relative;
   overflow: hidden;
 }
@@ -496,7 +498,8 @@ footer{ background: var(--ink); color: var(--text-invert); padding: 64px 40px 32
   .tech-grid{ grid-template-columns: 1fr; }
   .lineup-grid{ grid-template-columns: 1fr; }
   .stories-grid{ grid-template-columns: 1fr; }
-  .stat-row{ grid-template-columns: 70px 1fr; gap: 16px; }
+  .stat-row{ grid-template-columns: 1fr; gap: 10px; }
+  .stat-row .num{ font-size: 2.6rem; }
   .cta-banner{ padding: 44px 26px; margin: 68px auto; flex-direction: column; align-items: flex-start; }
   .footer-top{ grid-template-columns: 1fr; gap: 32px; }
   .footer-bottom{ flex-direction: column; align-items: flex-start; }
