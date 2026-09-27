@@ -503,7 +503,10 @@ footer{ background: var(--ink); color: var(--text-invert); padding: 64px 40px 32
   .wrap{ padding: 0 22px; }
   .nav-inner{ padding: 16px 22px; }
   .nav-links{ display: none; }
-  .hero{ padding: 56px 22px 0; }
+  .hero{ padding: 56px 4px 0; }
+  .hero .btn-solid{
+  transform: translateX(-13px);
+}
   .hero-visual{ margin: 0 -22px; height: 260px; }
   section{ padding: 68px 22px; }
   .spec-row{ grid-template-columns: repeat(2, 1fr); }
@@ -511,22 +514,28 @@ footer{ background: var(--ink); color: var(--text-invert); padding: 64px 40px 32
   .spec-cell:nth-child(n+3){ border-top: 1px solid var(--border); }
   .tech-grid{ grid-template-columns: 1fr; }
   .lineup-grid{ grid-template-columns: 1fr; }
+@media (max-width:720px){
+  .shoe-card .frame{
+    height: 180px;
+  }
+
   .shoe-card .frame .shoe-photo{
-  object-fit: contain;
-  object-position: center;
+    object-fit: cover;
+    object-position: center;
+  }
 }
   /* First shoe only */
   .shoe-card:nth-child(1) .frame .shoe-photo {
-    transform: scale(1.25);
+    transform: scale(1.0);
 }
   /* Second image */
     .shoe-card:nth-child(2) .frame .shoe-photo {
-        transform: scale(1.125);
+        transform: scale(1.0);
     }
 
     /* Third image */
     .shoe-card:nth-child(3) .frame .shoe-photo {
-        transform: scale(1.125);
+        transform: scale(1.0);
     }
   .stories-grid{ grid-template-columns: 1fr; }
   .stat-row{ grid-template-columns: 1fr; gap: 10px; }
