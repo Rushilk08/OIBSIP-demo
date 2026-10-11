@@ -1,15 +1,3 @@
-/* ============================================================
-   Temperature Converter – vanilla JavaScript
-   Checklist coverage:
-   1. Numeric input + validation (real-time, error message)
-   2. Input unit selector (radio buttons: C / F / K)
-   3. All output units shown simultaneously
-   4. Convert button (click) – Enter key also works
-   5. Result area with unit labels
-   6. Absolute-zero edge case with friendly message
-   7. Centred UI (see style.css)
-   ============================================================ */
-
 (function () {
   "use strict";
 

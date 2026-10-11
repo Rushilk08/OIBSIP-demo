@@ -1,9 +1,9 @@
 /* ---------- Design tokens ---------- */
 :root {
-  --bg: #18181B;    /* violet backdrop (reference used yellow) */
+  --bg: #18181B;
   --stripe-light: #3F3F46;
   --stripe-grey: #303038;
-  --panel: #25272d;        /* dark neumorphic surface */
+  --panel: #25272d;
   --panel-hi: #2d3037;
   --shadow-dark: #17181c;
   --shadow-light: #33363e;
