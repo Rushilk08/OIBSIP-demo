@@ -3,10 +3,7 @@
   var hero = document.getElementById('home');
   var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  /* ---------- Portrait ----------
-     To use your own photo: export a PNG with a transparent background
-     (head and shoulders, roughly 3:4), save it next to this file and set
-     AVATAR_SRC = 'me.png'. The outline effect follows its shape automatically. */
+  /* ---------- Portrait ---------- */
   var AVATAR_SRC = 'assets/me.png';
 
   var TORSO = 'M30 860C30 705 165 616 236 588H364C435 616 570 705 570 860Z';

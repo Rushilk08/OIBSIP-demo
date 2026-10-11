@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Convert temperatures between Celsius, Fahrenheit and Kelvin instantly." />
+  <title>Temperature Converter</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <main class="stage">
+    <h1 class="page-title">Temperature Converter</h1>
+    <p class="page-sub">Celsius · Fahrenheit · Kelvin</p>
+
+    <section class="app" aria-label="Temperature converter">
+
+      <!-- LEFT: input + input unit (Checklist 1 & 2) -->
+      <div class="panel panel-input">
+        <h2 class="panel-title">Input</h2>
+
+        <label class="field-label" for="tempInput">Temperature value</label>
+        <div class="input-wrap" id="inputWrap">
+          <input
+            type="text"
+            id="tempInput"
+            inputmode="decimal"
+            autocomplete="off"
+            placeholder="e.g. 25"
+            aria-describedby="errorMsg"
+          />
+        </div>
+        <p class="error" id="errorMsg" role="alert" aria-live="polite"></p>
+
+        <fieldset class="unit-group">
+          <legend class="field-label">Convert from</legend>
+
+          <input type="radio" name="unit" id="unitC" value="C" checked />
+          <label for="unitC" class="pill">Celsius <span>°C</span></label>
+
+          <input type="radio" name="unit" id="unitF" value="F" />
+          <label for="unitF" class="pill">Fahrenheit <span>°F</span></label>
+
+          <input type="radio" name="unit" id="unitK" value="K" />
+          <label for="unitK" class="pill">Kelvin <span>K</span></label>
+        </fieldset>
+      </div>
+
+      <!-- MIDDLE: gauge + action buttons (Checklist 4) -->
+      <div class="panel panel-middle">
+        <h2 class="panel-title">Gauge</h2>
+
+        <div class="dial" aria-hidden="true">
+          <svg viewBox="0 0 200 200">
+            <circle class="dial-track" cx="100" cy="100" r="80" />
+            <circle class="dial-fill" id="dialFill" cx="100" cy="100" r="80" />
+          </svg>
+          <div class="dial-center">
+            <span class="dial-value" id="dialValue">--</span>
+            <span class="dial-unit">°C</span>
+          </div>
+        </div>
+        <p class="dial-caption" id="dialCaption">Enter a value to begin</p>
+
+        <div class="actions">
+          <button type="button" class="btn btn-primary" id="convertBtn">Convert</button>
+          <button type="button" class="btn btn-ghost" id="resetBtn">Reset</button>
+        </div>
+      </div>
+
+      <!-- RIGHT: results for all units at once (Checklist 3, 5 & 6) -->
+      <div class="panel panel-results">
+        <h2 class="panel-title">Results</h2>
+
+        <p class="notice" id="notice" role="status" aria-live="polite">
+          Press <strong>Convert</strong> to see all three units.
+        </p>
+
+        <ul class="results" id="results">
+          <li class="result" data-unit="C">
+            <span class="result-label">Celsius</span>
+            <span class="result-value" id="outC">--</span>
+            <button type="button" class="copy" data-copy="outC" aria-label="Copy Celsius value">Copy</button>
+          </li>
+          <li class="result" data-unit="F">
+            <span class="result-label">Fahrenheit</span>
+            <span class="result-value" id="outF">--</span>
+            <button type="button" class="copy" data-copy="outF" aria-label="Copy Fahrenheit value">Copy</button>
+          </li>
+          <li class="result" data-unit="K">
+            <span class="result-label">Kelvin</span>
+            <span class="result-value" id="outK">--</span>
+            <button type="button" class="copy" data-copy="outK" aria-label="Copy Kelvin value">Copy</button>
+          </li>
+        </ul>
+      </div>
+
+    </section>
+
+    <footer class="foot">Absolute zero: −273.15 °C = −459.67 °F = 0 K</footer>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
