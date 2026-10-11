@@ -15,9 +15,6 @@
 
   // ---- Constants ----
   const ABS_ZERO_C = -273.15;
-  const CIRCUMFERENCE = 2 * Math.PI * 80; // matches the SVG ring (r = 80)
-  const GAUGE_MIN_C = -50;                // gauge ring spans -50°C … 150°C
-  const GAUGE_MAX_C = 150;
 
   // ---- DOM references ----
   const input      = document.getElementById("tempInput");
@@ -26,9 +23,8 @@
   const convertBtn = document.getElementById("convertBtn");
   const resetBtn   = document.getElementById("resetBtn");
   const notice     = document.getElementById("notice");
-  const dialFill   = document.getElementById("dialFill");
-  const dialValue  = document.getElementById("dialValue");
-  const dialCaption = document.getElementById("dialCaption");
+  const badge      = document.getElementById("tempBadge");
+  const badgeLabel = document.getElementById("badgeLabel");
   const unitRadios = document.querySelectorAll('input[name="unit"]');
   const outputs = {
     C: document.getElementById("outC"),
@@ -39,6 +35,37 @@
 
   const UNIT_NAMES = { C: "Celsius", F: "Fahrenheit", K: "Kelvin" };
   const UNIT_SYMBOLS = { C: "°C", F: "°F", K: "K" };
+
+  // ---- Dynamic temperature icon (snowflake / thermometer / flame) ----
+  const COLD_BELOW_C = 15;   // below this  -> snowflake
+  const HOT_FROM_C   = 35;   // this & above -> flame; in between -> thermometer
+
+  // Pass a Celsius value, or null to return to the idle state
+  function setBadge(celsius) {
+    let state, label;
+    if (celsius === null) {
+      state = "idle";
+      label = "Waiting for a value";
+    } else if (celsius < COLD_BELOW_C) {
+      state = "cold";
+      label = "Cold · below " + COLD_BELOW_C + " °C";
+    } else if (celsius < HOT_FROM_C) {
+      state = "moderate";
+      label = "Moderate · " + COLD_BELOW_C + "–" + HOT_FROM_C + " °C";
+    } else {
+      state = "hot";
+      label = "Hot · " + HOT_FROM_C + " °C and above";
+    }
+
+    if (badge.dataset.state !== state) {
+      badge.dataset.state = state;
+      badge.classList.remove("swap");
+      void badge.offsetWidth; // restart the pop animation
+      badge.classList.add("swap");
+    }
+    badgeLabel.textContent = label;
+    badge.setAttribute("aria-label", "Temperature status: " + label);
+  }
 
   // ---- Conversion helpers (everything goes through Celsius) ----
   function toCelsius(value, unit) {
@@ -128,10 +155,7 @@
   function clearResults() {
     Object.values(outputs).forEach((el) => (el.textContent = "--"));
     resultItems.forEach((li) => li.classList.remove("is-source"));
-    dialFill.style.strokeDashoffset = CIRCUMFERENCE;
-    dialFill.style.stroke = "";
-    dialValue.textContent = "--";
-    dialCaption.textContent = "Enter a value to begin";
+    setBadge(null);
   }
 
   function shake() {
@@ -157,30 +181,6 @@
       return;
     }
     clearError();
-  }
-
-  // ---- Gauge ----
-  function updateGauge(celsius) {
-    const clamped = Math.min(Math.max(celsius, GAUGE_MIN_C), GAUGE_MAX_C);
-    const fraction = (clamped - GAUGE_MIN_C) / (GAUGE_MAX_C - GAUGE_MIN_C);
-    dialFill.style.strokeDashoffset = CIRCUMFERENCE * (1 - fraction);
-
-    // Colour hint: cool → mint, warm → amber, hot → coral
-    if (celsius <= 0) dialFill.style.stroke = "#7dd3fc";
-    else if (celsius < 30) dialFill.style.stroke = "#5eead4";
-    else if (celsius < 60) dialFill.style.stroke = "#fcd34d";
-    else dialFill.style.stroke = "#ff7a8a";
-
-    dialValue.textContent = format(celsius);
-
-    let caption;
-    if (celsius <= 0) caption = "Freezing";
-    else if (celsius < 15) caption = "Cold";
-    else if (celsius < 26) caption = "Comfortable";
-    else if (celsius < 38) caption = "Warm";
-    else if (celsius < 100) caption = "Hot";
-    else caption = "Boiling point or beyond";
-    dialCaption.textContent = caption;
   }
 
   // ---- Main convert action (Checklist 4) ----
@@ -225,7 +225,7 @@
       li.classList.add("pop");
     });
 
-    updateGauge(celsius);
+    setBadge(celsius);
 
     let message =
       "<strong>" + format(result.value) + " " + UNIT_SYMBOLS[unit] + "</strong> (" +

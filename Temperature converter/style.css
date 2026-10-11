@@ -1,8 +1,8 @@
 /* ---------- Design tokens ---------- */
 :root {
-  --bg: #6a4cff;           /* violet backdrop (reference used yellow) */
-  --stripe-light: #ffffff;
-  --stripe-grey: #d9d5f2;
+  --bg: #18181B;    /* violet backdrop (reference used yellow) */
+  --stripe-light: #3F3F46;
+  --stripe-grey: #303038;
   --panel: #25272d;        /* dark neumorphic surface */
   --panel-hi: #2d3037;
   --shadow-dark: #17181c;
@@ -169,48 +169,124 @@ body {
 .unit-group input:checked + .pill span { color: #0d2b27; }
 .unit-group input:focus-visible + .pill { outline: 2px solid #fff; outline-offset: 2px; }
 
-/* ---------- Dial ---------- */
-.dial {
+/* ---------- Dynamic temperature icon badge ---------- */
+.temp-badge {
+  --ring-a: #5eead4;       /* idle: cyan top … orange bottom, like the reference */
+  --ring-b: #ff9f43;
+  --icon: #8b919e;
   position: relative;
-  width: 190px;
-  height: 190px;
-  margin: 0 auto;
+  width: 160px;
+  height: 160px;
+  margin: auto auto 10px;   /* auto top margin centres the badge in the free space */
+  border-radius: 50%;
+  background: linear-gradient(145deg, #30333a, #1b1d21);
+  box-shadow: 8px 8px 16px var(--shadow-dark),
+              -5px -5px 12px var(--shadow-light);
 }
-.dial svg { width: 100%; height: 100%; transform: rotate(-90deg); }
-.dial-track, .dial-fill {
-  fill: none;
-  stroke-width: 14;
-  stroke-linecap: round;
+.temp-badge[data-state="cold"]     { --ring-a: #bae6fd; --ring-b: #38bdf8; --icon: #c7ecff; }
+.temp-badge[data-state="moderate"] { --ring-a: #5eead4; --ring-b: #fcd34d; --icon: #c9fff2; }
+.temp-badge[data-state="hot"]      { --ring-a: #fcd34d; --ring-b: #ff5a36; --icon: #ffc08a; }
+
+.temp-badge.swap { animation: badgePop 0.5s ease; }
+@keyframes badgePop {
+  0%   { transform: scale(0.88); }
+  60%  { transform: scale(1.06); }
+  100% { transform: scale(1); }
 }
-.dial-track { stroke: #1b1d22; }
-.dial-fill {
-  stroke: var(--accent);
-  stroke-dasharray: 502.65;      /* 2 * PI * 80 */
-  stroke-dashoffset: 502.65;
-  transition: stroke-dashoffset 0.8s cubic-bezier(.2,.8,.2,1), stroke 0.4s;
-  filter: drop-shadow(0 0 6px rgba(94, 234, 212, 0.5));
-}
-.dial-center {
+
+/* gradient ring (masked so only the border shows) */
+.badge-ring {
   position: absolute;
-  inset: 0;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+  inset: 7px;
+  border-radius: 50%;
+  padding: 4px;
+  background: linear-gradient(180deg, var(--ring-a), var(--ring-b));
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+          mask: linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0);
+  filter: drop-shadow(0 0 5px var(--ring-b));
 }
-.dial-value {
-  font-family: "Consolas", "Courier New", monospace;
-  font-size: 2.1rem;
-  font-weight: 700;
-  color: var(--text);
+.temp-badge[data-state="hot"] .badge-ring { animation: ringGlow 1.4s ease-in-out infinite; }
+@keyframes ringGlow {
+  0%, 100% { filter: drop-shadow(0 0 4px var(--ring-b)); }
+  50%      { filter: drop-shadow(0 0 11px var(--ring-b)); }
 }
-.dial-unit { color: var(--muted); font-size: 0.85rem; }
-.dial-caption {
+
+.badge-core {
+  position: absolute;
+  inset: 15px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: radial-gradient(circle at 30% 25%, #2c2f35, #15161a);
+  box-shadow: inset 3px 3px 8px #0d0e10, inset -2px -2px 6px #2d3037;
+}
+
+/* the three icons sit on top of each other; only the active one shows */
+.badge-icon {
+  grid-area: 1 / 1;
+  width: 74px;
+  height: 74px;
+  color: var(--icon);
+  opacity: 0;
+  transform: scale(0.5) rotate(-25deg);
+  transition: opacity 0.35s ease, transform 0.45s cubic-bezier(.2,.8,.2,1);
+  filter: drop-shadow(0 0 6px var(--icon));
+}
+.temp-badge[data-state="cold"] .icon-cold,
+.temp-badge[data-state="moderate"] .icon-moderate,
+.temp-badge[data-state="hot"] .icon-hot {
+  opacity: 1;
+  transform: none;
+}
+/* idle: dimmed thermometer */
+.temp-badge[data-state="idle"] .icon-moderate {
+  opacity: 0.45;
+  transform: none;
+  filter: none;
+}
+
+/* icon animations run only while their state is active */
+.snow-spin, .mercury, .flame-path {
+  transform-box: fill-box;
+  animation-play-state: paused;
+}
+.snow-spin   { transform-origin: 50% 50%;  animation: snowSpin 9s linear infinite; }
+.mercury     { transform-origin: 50% 100%; animation: mercuryRise 2.4s ease-in-out infinite; }
+.flame-path  { transform-origin: 50% 100%; animation: flicker 1.1s ease-in-out infinite; }
+
+.temp-badge[data-state="cold"] .snow-spin,
+.temp-badge[data-state="moderate"] .mercury,
+.temp-badge[data-state="hot"] .flame-path { animation-play-state: running; }
+
+@keyframes snowSpin {
+  0%   { transform: rotate(0deg) scale(1); }
+  50%  { transform: rotate(180deg) scale(1.08); }
+  100% { transform: rotate(360deg) scale(1); }
+}
+@keyframes mercuryRise {
+  0%, 100% { transform: scaleY(0.5); }
+  50%      { transform: scaleY(1); }
+}
+@keyframes flicker {
+  0%, 100% { transform: scale(1, 1) rotate(0deg); }
+  20%      { transform: scale(1.05, 0.96) rotate(-2deg); }
+  40%      { transform: scale(0.96, 1.07) rotate(1.5deg); }
+  60%      { transform: scale(1.04, 1.02) rotate(-1deg); }
+  80%      { transform: scale(0.97, 1.05) rotate(2deg); }
+}
+
+.badge-label {
   text-align: center;
   color: var(--muted);
-  font-size: 0.9rem;
-  margin: 14px 0 20px;
+  font-size: 0.85rem;
+  letter-spacing: 0.4px;
+  margin-bottom: 18px;
   min-height: 20px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .snow-spin, .mercury, .flame-path, .badge-ring, .temp-badge.swap { animation: none !important; }
 }
 
 /* ---------- Buttons ---------- */

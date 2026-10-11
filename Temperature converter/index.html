@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content="Convert temperatures between Celsius, Fahrenheit and Kelvin instantly." />
   <title>Temperature Converter</title>
-  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
 
@@ -50,17 +50,50 @@
       <div class="panel panel-middle">
         <h2 class="panel-title">Gauge</h2>
 
-        <div class="dial" aria-hidden="true">
-          <svg viewBox="0 0 200 200">
-            <circle class="dial-track" cx="100" cy="100" r="80" />
-            <circle class="dial-fill" id="dialFill" cx="100" cy="100" r="80" />
-          </svg>
-          <div class="dial-center">
-            <span class="dial-value" id="dialValue">--</span>
-            <span class="dial-unit">°C</span>
-          </div>
+        <!-- Dynamic temperature icon: snowflake (cold), thermometer (moderate), flame (hot) -->
+        <div class="temp-badge" id="tempBadge" data-state="idle" role="img"
+             aria-label="Temperature status: waiting for a value">
+          <span class="badge-ring"></span>
+          <span class="badge-core">
+
+            <!-- Snowflake: cold -->
+            <svg class="badge-icon icon-cold" viewBox="0 0 64 64" aria-hidden="true">
+              <defs>
+                <g id="snowArm">
+                  <line x1="32" y1="8" x2="32" y2="56" />
+                  <polyline points="25,15 32,22 39,15" />
+                  <polyline points="25,49 32,42 39,49" />
+                </g>
+              </defs>
+              <g class="snow-spin" fill="none" stroke="currentColor" stroke-width="3.2"
+                 stroke-linecap="round" stroke-linejoin="round">
+                <use href="#snowArm" />
+                <use href="#snowArm" transform="rotate(60 32 32)" />
+                <use href="#snowArm" transform="rotate(120 32 32)" />
+              </g>
+            </svg>
+
+            <!-- Thermometer: moderate (also shown, dimmed, while idle) -->
+            <svg class="badge-icon icon-moderate" viewBox="0 0 64 64" aria-hidden="true">
+              <path d="M26 38V14a6 6 0 0 1 12 0v24a11 11 0 1 1-12 0z"
+                    fill="none" stroke="currentColor" stroke-width="3.2" stroke-linejoin="round" />
+              <path d="M45 18h5M45 26h5M45 34h5" fill="none" stroke="currentColor"
+                    stroke-width="3" stroke-linecap="round" />
+              <rect class="mercury" x="30" y="20" width="4" height="27" rx="2" fill="currentColor" />
+              <circle cx="32" cy="47" r="6" fill="currentColor" />
+            </svg>
+
+            <!-- Flame: hot -->
+            <svg class="badge-icon icon-hot" viewBox="0 0 24 24" aria-hidden="true">
+              <path class="flame-path"
+                    d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"
+                    fill="currentColor" fill-opacity="0.28" stroke="currentColor"
+                    stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+
+          </span>
         </div>
-        <p class="dial-caption" id="dialCaption">Enter a value to begin</p>
+        <p class="badge-label" id="badgeLabel">Waiting for a value</p>
 
         <div class="actions">
           <button type="button" class="btn btn-primary" id="convertBtn">Convert</button>
