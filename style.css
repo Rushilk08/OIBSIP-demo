@@ -1,8 +1,3 @@
-/* ---------- Brand tokens ----------
-   Ink   #1a1918  page background
-   Bone  #eadfc7  display type, fills, inverted section
-   Stone #9c9583  secondary text on ink
-   Fonts: Anton (display, condensed) + Instrument Sans (body)          */
 :root{
   --ink:#1a1918;
   --bone:#eadfc7;
